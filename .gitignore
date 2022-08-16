@@ -1,0 +1,4 @@
+node_modules/
+bud/
+controller/db
+.Ds*
