@@ -1,6 +1,7 @@
-<script>
+<script lang="typescript">
   export let postList
-  const states = postList.map((item) => ({ id: item.id, state: true }))
+  import { fade } from 'svelte/transition'
+  const states = postList.map((item) => ({ id: item.id, state: false }))
   function findItem(id) {
     return states.findIndex((item) => item.id === id)
   }
@@ -25,8 +26,6 @@
               states[index].state = false
             }}
           />
-
-          <div bind:innerHTML={content} contenteditable />
         {:else}
           <img
             class="show-content"
@@ -38,6 +37,7 @@
               states[index].state = true
             }}
           />
+          <div bind:innerHTML={content} contenteditable transition:fade={{ delay: 250, duration: 300 }} />
         {/if}
         <hr />
       </li>
@@ -74,6 +74,7 @@
   .picture {
     border-radius: 20px;
     transition: all 0.2s;
+    margin: 0 auto;
   }
   .picture:hover {
     transition: all 0.2s;
@@ -86,5 +87,8 @@
   p:hover {
     transition: all 0.2s;
     color: rgb(240, 126, 27);
+  }
+  .p-content {
+    overflow: hidden;
   }
 </style>
